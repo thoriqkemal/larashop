@@ -35,6 +35,7 @@
             </td>
             <td>
                 <a href="{{route('users.edit', [$user->id])}}" class="btn btn-info text-white btn-sm">Edit</a>
+                <a href="{{route('users.show', [$user->id])}}" class="btn btn-primary btn-sm">Detail</a>
                 <form onsubmit="return confirm('Delete this user permanently?')" class="d-inline"
                     action="{{route('users.destroy', [$user->id])}}" method="POST">
                     @csrf
