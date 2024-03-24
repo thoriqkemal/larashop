@@ -48,8 +48,7 @@
                 {{Auth::user()->name}}
             </button>
             @endif
-            <div class="dropdown-menu dropdown-menu-right" id="navbar-
-    dropdown">
+            <div class="dropdown-menu dropdown-menu-right" id="navbar-dropdown">
                 <a href="#" class="dropdown-item">Profile</a>
                 <a href="#" class="dropdown-item">Setting</a>
                 <div class="dropdown-divider"></div>
@@ -72,6 +71,11 @@
                     <li>
                         <a href="/home"><span class="oi oi-home"></span>Home</a>
                     </li>
+                    <li>
+                        <a href="{{route('users.index')}}">
+                            <span class="oi oi-people"></span> Manage Users
+                        </a>
+                    </li>
                     <div class="d-block d-md-none">
                         <div class="dropdown-divider"></div>
                         <li><a href="#"> Profile</a></li>
@@ -92,7 +96,7 @@
                 <div class="row ">
                     <div class="col-md-12 pl-3 pt-2">
                         <div class="pl-3">
-                            <h3>@yield("pageTitle")</h3>
+                            <h3>@yield("title")</h3>
                             <br />
                         </div>
                     </div>
