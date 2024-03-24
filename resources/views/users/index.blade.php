@@ -27,7 +27,7 @@
                 @endif
             </td>
             <td>
-                [TODO: actions]
+                <a href="{{route('users.edit', [$user->id])}}" class="btn btn-info text-white btn-sm">Edit</a>
             </td>
         </tr>
         @endforeach
