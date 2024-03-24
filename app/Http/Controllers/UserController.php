@@ -53,7 +53,7 @@ class UserController extends Controller
         }
 
         $new_user->save();
-        return redirect()->route('users.create')->with('status', 'User successfully created');
+        return redirect()->route('users.index')->with('status', 'User successfully created');
     }
 
     /**
@@ -103,7 +103,7 @@ class UserController extends Controller
         }
 
         $user->save();
-        return redirect()->route('users.edit', [$id])->with('status', 'User successfully updated');
+        return redirect()->route('users.index', [$id])->with('status', 'User successfully updated');
     }
 
     /**
@@ -114,6 +114,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('users.index')->with('status', 'User succesfully deleted');
     }
 }
