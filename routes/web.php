@@ -15,9 +15,12 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
+Route::match(['GET', 'POST'], '/register', function() {
+    return redirect('/login');
+})->name('register');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
