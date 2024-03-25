@@ -47,8 +47,8 @@
             <th><b>Name</b></th>
             <th><b>Username</b></th>
             <th><b>Email</b></th>
-            <th><b>Avatar</b></th>
             <th><b>Status</b></th>
+            <th><b>Avatar</b></th>
             <th><b>Action</b></th>
         </tr>
     </thead>
