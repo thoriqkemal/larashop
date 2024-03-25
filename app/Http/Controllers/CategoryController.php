@@ -131,4 +131,9 @@ class CategoryController extends Controller
         $category->delete();
         return redirect()->route('categories.index')->with('status', 'Category successfully moved to trash');
     }
+
+    public function trash(){
+        $deleted_category = Category::onlyTrashed()->paginate(10);
+        return view('categories.trash', ['categories' => $deleted_category]);
+    }
 }
