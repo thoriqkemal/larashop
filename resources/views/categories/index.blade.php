@@ -17,6 +17,16 @@
 </div>
 <hr class="my-3">
 
+@if(session('status'))
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-warning">
+            {{ session('status') }}
+        </div>
+    </div>
+</div>
+@endif
+
 <div class="row">
     <div class="col-md-12">
         <table class="table table-bordered table-stripped">
@@ -42,7 +52,16 @@
                     </td>
                     <td>
                         <a href="{{route('categories.edit', [$category->id])}}" class="btn btn-info btn-sm"> Edit </a>
-                        <a href="{{route('categories.show', [$category->id])}}" class="btn btn-primary btn-sm"> Show </a>
+                        <a href="{{route('categories.show', [$category->id])}}" class="btn btn-primary btn-sm"> Show
+                        </a>
+                        <form class="d-inline" action="{{route('categories.destroy', [$category->id])}}" method="POST"
+                            onsubmit="return confirm('Move category to trash?')">
+
+                            @csrf
+
+                            <input type="hidden" value="DELETE" name="_method">
+                            <input type="submit" class="btn btn-danger btn-sm" value="Trash">
+                        </form>
                     </td>
                 </tr>
                 @endforeach
