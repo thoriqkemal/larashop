@@ -5,8 +5,12 @@
 @section("content")
 
 @if(session('status'))
-<div class="alert alert-success">
-    {{session('status')}}
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-success">
+            {{session('status')}}
+        </div>
+    </div>
 </div>
 @endif
 
@@ -27,6 +31,8 @@
         </div>
     </div>
 </form>
+
+<hr class="my-3">
 
 <div class="row">
     <div class="col-md-12 text-right">
