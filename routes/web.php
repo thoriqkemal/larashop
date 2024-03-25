@@ -31,5 +31,5 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('users', UserController::class);
 
 Route::get('/categories/trash', [CategoryController::class, 'trash'])->name('categories.trash');
-
+Route::get('/categories/{id}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
 Route::resource('categories', CategoryController::class);
