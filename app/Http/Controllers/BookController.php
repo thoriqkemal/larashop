@@ -17,7 +17,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $books = Book::with('categories')->paginate(10);
+
+        return view('books.index', ['books' => $books]);
     }
 
     /**
