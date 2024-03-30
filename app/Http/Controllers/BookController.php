@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -59,6 +60,8 @@ class BookController extends Controller
         $new_book->created_by = Auth::user()->id;
 
         $new_book->save();
+
+        $new_book->categories()->attach($request->get('categories'));
 
         if($request->get('save_action') == 'PUBLISH') {
             return redirect()->route('books.create')
