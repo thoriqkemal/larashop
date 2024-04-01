@@ -11,16 +11,20 @@
             <div class="col-md-6">
                 <ul class="nav nav-pills card-header-pills">
                     <li class="nav-item">
-                        <a class="nav-link {{Request::get('status') == NULL && Request::path() == 'books' ? 'active' : ''}}" href="{{route('books.index')}}">All</a>
+                        <a class="nav-link {{Request::get('status') == NULL && Request::path() == 'books' ? 'active' : ''}}"
+                            href="{{route('books.index')}}">All</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{Request::get('status') == 'publish' ? 'active' : ''}}" href="{{route('books.index', ['status' => 'publish'])}}">Publish</a>
+                        <a class="nav-link {{Request::get('status') == 'publish' ? 'active' : ''}}"
+                            href="{{route('books.index', ['status' => 'publish'])}}">Publish</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{Request::get('status') == 'draft' ? 'active' : ''}}" href="{{route('books.index', ['status' => 'draft'])}}" >Draft</a>
+                        <a class="nav-link {{Request::get('status') == 'draft' ? 'active' : ''}}"
+                            href="{{route('books.index', ['status' => 'draft'])}}">Draft</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{Request::path() == 'books/trash' ? 'active' : ''}}" href="{{route('books.trash')}}">Trash</a>
+                        <a class="nav-link {{Request::path() == 'books/trash' ? 'active' : ''}}"
+                            href="{{route('books.trash')}}">Trash</a>
                     </li>
                 </ul>
             </div>
@@ -74,6 +78,12 @@
                         <form method="POST" action="{{route('books.restore', [$book->id])}}" class="d-inline">
                             @csrf
                             <input type="submit" value="Restore" class="btn btn-success" />
+                        </form>
+                        <form method="POST" action="{{route('books.delete-permanent', [$book->id])}}" class="d-inline"
+                            onsubmit="return confirm('Delete this book permanently?')">
+                            @csrf
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="submit" value="Delete" class="btn btn-danger">
                         </form>
                     </td>
                 </tr>
