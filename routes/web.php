@@ -37,4 +37,5 @@ Route::delete('/categories/{category}/delete-permanent', [CategoryController::cl
 Route::get('/ajax/categories/search',[CategoryController::class, 'ajaxSearch']);
 Route::resource('categories', CategoryController::class);
 
+Route::get('/books/trash', [BookController::class, 'trash'])->name('books.trash');
 Route::resource('books', BookController::class);

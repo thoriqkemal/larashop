@@ -1,6 +1,6 @@
 @extends('layouts.global')
 
-@section('title') Books list @endsection
+@section('title') Trashed Books @endsection
 
 @section('content')
 <div class="row">
@@ -11,16 +11,16 @@
             <div class="col-md-6">
                 <ul class="nav nav-pills card-header-pills">
                     <li class="nav-item">
-                        <a class="nav-link {{Request::get('status') == NULL && Request::path() == 'books' ? 'active' : ''}}" href="{{route('books.index')}}">All</a>
+                        <a class="nav-link" href="{{route('books.index')}}">All</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{Request::get('status') == 'publish' ? 'active' : ''}}" href="{{route('books.index', ['status' => 'publish'])}}">Publish</a>
+                        <a class="nav-link" href="{{route('books.index', ['status' => 'publish'])}}">Publish</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{Request::get('status') == 'draft' ? 'active' : ''}}" href="{{route('books.index', ['status' => 'draft'])}}" >Draft</a>
+                        <a class="nav-link" href="{{route('books.index', ['status' => 'draft'])}}">Draft</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{Request::path() == 'books/trash' ? 'active' : ''}}" href="{{route('books.trash')}}">Trash</a>
+                        <a class="nav-link" href="{{route('books.trash')}}">Trash</a>
                     </li>
                 </ul>
             </div>
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        @if (session('status'))
+        @if(session('status'))
         <div class="alert alert-success">
             {{session('status')}}
         </div>
@@ -45,7 +45,6 @@
                     <th><b>Cover</b></th>
                     <th><b>Title</b></th>
                     <th><b>Author</b></th>
-                    <th><b>Status</b></th>
                     <th><b>Categories</b></th>
                     <th><b>Stock</b></th>
                     <th><b>Price</b></th>
@@ -63,15 +62,6 @@
                     <td>{{$book->title}}</td>
                     <td>{{$book->author}}</td>
                     <td>
-                        @if($book->status == "DRAFT")
-                        <span class="badge bg-dark text-white">{{$book->status}}
-                        </span>
-                        @else
-                        <span class="badge badge-success">{{$book->status}}
-                        </span>
-                        @endif
-                    </td>
-                    <td>
                         <ul class="pl-3">
                             @foreach($book->categories as $category)
                             <li>{{$category->name}}</li>
@@ -81,15 +71,7 @@
                     <td>{{$book->stock}}</td>
                     <td>{{$book->price}}</td>
                     <td>
-                        <a href="{{route('books.edit', [$book->id])}}" class="btn btn-info btn-sm"> Edit </a>
-                        <form method="POST" class="d-inline" onsubmit="return confirm('Move book to trash?')"
-                            action="{{route('books.destroy', [$book->id])}}">
-
-                            @csrf
-
-                            <input type="hidden" value="DELETE" name="_method">
-                            <input type="submit" value="Trash" class="btn btn-danger btn-sm">
-                        </form>
+                        [TODO: actions]
                     </td>
                 </tr>
                 @endforeach
