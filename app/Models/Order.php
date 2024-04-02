@@ -18,7 +18,7 @@ class Order extends Model
     public function getTotalQuantityAttribute() {
         $total_quantity = 0;
 
-        foreach ($this->books() as $book) {
+        foreach ($this->books as $book) {
             $total_quantity += $book->pivot->quantity;
         }
 
