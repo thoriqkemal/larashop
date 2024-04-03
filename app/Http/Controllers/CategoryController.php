@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -46,6 +47,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        Validator::make($request->all(), [
+            'name' => 'required|min:3|max:20',
+            'image' => 'required'
+        ])->validate();
+
         $name = $request->get('name');
 
         $new_category = new Category();
