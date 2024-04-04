@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -102,10 +103,20 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $category = Category::findOrFail($id);
+
+        Validator::make($request->all(), [
+            'name' => 'required|min:3|max:20',
+            'image' => 'required',
+            'slug' => [
+                'required',
+                Rule::unique('categories')->ignore($category->slug, 'slug')
+            ]
+        ]);
+
         $name = $request->get('name');
         $slug = $request->get('slug');
 
-        $category = Category::findOrFail($id);
 
         $category->name = $name;
         $category->slug = $slug;
