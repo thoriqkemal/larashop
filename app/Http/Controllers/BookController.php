@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class BookController extends Controller
 {
@@ -126,6 +127,19 @@ class BookController extends Controller
     public function update(Request $request, $id)
     {
         $book = Book::findOrFail($id);
+
+        Validator::make($request->all(), [
+            'title' => 'required|min:5|max:200',
+            'slug' => [
+                'required',
+                Rule::unique('books')->ignore($book->slug, 'slug')
+            ],
+            'description' => 'required|min:20|max:1000',
+            'author' => 'required|min:3|max:100',
+            'publisher' => 'required|min:3|max:200',
+            'price' => 'required|digits_between:0,10',
+            'stock' => 'required|digits_between:0,10',
+        ])->validate();
 
         $book->title = $request->get('title');
         $book->slug = $request->get('slug');
